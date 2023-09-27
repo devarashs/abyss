@@ -1,22 +1,28 @@
-import { Title, Text, Anchor } from '@mantine/core';
+import { Title, Text, useMantineColorScheme } from '@mantine/core';
 import classes from './Welcome.module.css';
 
 export function Welcome() {
+  const { colorScheme } = useMantineColorScheme();
   return (
     <>
       <Title className={classes.title} ta="center" mt={100}>
         Welcome to{' '}
-        <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
-          Mantine
+        <Text
+          inherit
+          variant="gradient"
+          component="span"
+          gradient={{
+            from: colorScheme === 'dark' ? 'lightblue' : 'pink',
+            to: colorScheme === 'dark' ? 'blue' : 'purple',
+          }}
+        >
+          Abyss
         </Text>
       </Title>
-      <Text color="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
-        This starter Vite project includes a minimal setup, if you want to learn more on Mantine +
-        Vite integration follow{' '}
-        <Anchor href="https://mantine.dev/guides/vite/" size="lg">
-          this guide
-        </Anchor>
-        . To get started edit pages/Home.page.tsx file.
+      <Text ta="center" size="lg" maw={580} mx="auto" mt="xl">
+        Nietzsche once said, &quot;He who fights with monsters should look to it that he himself
+        does not become a monster. And if you gaze long into an abyss, the abyss also gazes into
+        you.&quot;
       </Text>
     </>
   );
