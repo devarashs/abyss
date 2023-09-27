@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError } from 'axios';
 
 function isCustomError(error: CustomError | AxiosError): error is CustomError {
   return (error as CustomError).response !== undefined;

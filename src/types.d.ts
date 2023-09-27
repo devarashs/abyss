@@ -10,3 +10,14 @@ interface UserInfo {
 interface UserState {
   userInfo: UserInfo | null;
 }
+
+type CustomError = {
+  message: string;
+  response?: {
+    data:
+      | {
+          message: string;
+        }
+      | undefined;
+  };
+};
