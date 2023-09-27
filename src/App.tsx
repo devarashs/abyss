@@ -1,33 +1,15 @@
 import '@mantine/core/styles.css';
-import {
-  AppShell,
-  Button,
-  Group,
-  Menu,
-  Text,
-  Title,
-  rem,
-  useMantineColorScheme,
-} from '@mantine/core';
-import {
-  IconSettings,
-  IconSearch,
-  IconPhoto,
-  IconMessageCircle,
-  IconTrash,
-  IconAlien,
-} from '@tabler/icons-react';
-import { useSelector } from 'react-redux';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { AppShell, Button, Group, Text, Title, useMantineColorScheme } from '@mantine/core';
+import { IconBrightnessUp, IconMoonFilled } from '@tabler/icons-react';
+import { ToastContainer } from 'react-toastify';
 import { COLORS } from './constants/themeStatics';
 import { Router } from './Router';
-import { selectUserInfo } from './Store';
+import { HeaderMenu } from './components/HeaderMenu/HeaderMenu';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
-  const [toggleMenu, setToggleMenu] = useState(false);
-  const userInfo = useSelector(selectUserInfo);
-  const { colorScheme } = useMantineColorScheme();
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+
   return (
     <AppShell padding="md" header={{ height: 85 }}>
       <AppShell.Header
@@ -49,81 +31,48 @@ export default function App() {
                 to: colorScheme === 'dark' ? 'lightblue' : 'purple',
               }}
             >
-              Abyss
+              <a style={{ textDecoration: 'none', color: 'inherit' }} href="/">
+                Abyss
+              </a>
             </Text>
           </Title>
-
-          <Menu shadow="md" width={200}>
-            <Menu.Target>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.96 }}
+          <Group>
+            {colorScheme === 'dark' ? (
+              <Button
+                onClick={() => setColorScheme('light')}
                 style={{ backgroundColor: 'inherit' }}
               >
-                <Button
-                  onClick={() => setToggleMenu(!toggleMenu)}
-                  style={{ backgroundColor: 'inherit' }}
-                >
-                  <IconAlien
-                    style={{
-                      color: colorScheme === 'dark' ? COLORS.lightviolet : COLORS.violet,
-                    }}
-                    size={35}
-                    strokeWidth={2}
-                  />
-                </Button>
-              </motion.div>
-            </Menu.Target>
+                <IconMoonFilled
+                  style={{
+                    color: COLORS.lightviolet,
+                  }}
+                  size={35}
+                  strokeWidth={2}
+                />
+              </Button>
+            ) : (
+              <Button onClick={() => setColorScheme('dark')} style={{ backgroundColor: 'inherit' }}>
+                <IconBrightnessUp
+                  style={{
+                    color: COLORS.violet,
+                  }}
+                  size={35}
+                  strokeWidth={2}
+                />
+              </Button>
+            )}
 
-            <Menu.Dropdown>
-              <Menu.Label>Abyss</Menu.Label>
-              {!userInfo && (
-                <>
-                  <Menu.Item
-                    leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
-                  >
-                    Log in
-                  </Menu.Item>
-                </>
-              )}
-
-              <Menu.Item
-                leftSection={<IconMessageCircle style={{ width: rem(14), height: rem(14) }} />}
-              >
-                News
-              </Menu.Item>
-              <Menu.Item leftSection={<IconPhoto style={{ width: rem(14), height: rem(14) }} />}>
-                Gallery
-              </Menu.Item>
-              <Menu.Item
-                leftSection={<IconSearch style={{ width: rem(14), height: rem(14) }} />}
-                rightSection={
-                  <Text size="xs" c="dimmed">
-                    ⌘K
-                  </Text>
-                }
-              >
-                Search
-              </Menu.Item>
-
-              <Menu.Divider />
-              {userInfo && (
-                <>
-                  <Menu.Label>Danger zone</Menu.Label>
-                  <Menu.Item
-                    color="red"
-                    leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}
-                  >
-                    Delete my account
-                  </Menu.Item>
-                </>
-              )}
-            </Menu.Dropdown>
-          </Menu>
+            <HeaderMenu />
+          </Group>
         </Group>
       </AppShell.Header>
 
       <AppShell.Main>
+        <ToastContainer
+          theme={colorScheme === 'dark' ? 'dark' : 'light'}
+          position="bottom-center"
+          limit={1}
+        />
         <Router />
       </AppShell.Main>
     </AppShell>

@@ -1,5 +1,4 @@
 import { Paper, Text, Title, useMantineColorScheme } from '@mantine/core';
-import React from 'react';
 
 export function About() {
   const { colorScheme } = useMantineColorScheme();
@@ -8,17 +7,17 @@ export function About() {
       px="lg"
       py="sm"
       my="md"
+      w={{ base: '100vw', md: '65vw' }}
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 600,
         textAlign: 'center',
+        borderRadius: 25,
       }}
     >
-      <Title my="md" ta="center" size={35} order={2}>
+      <Title mb="md" ta="center" size={35} order={2}>
         <Text
           inherit
           variant="gradient"

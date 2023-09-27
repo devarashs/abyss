@@ -19,7 +19,17 @@ export function Welcome() {
           Abyss
         </Text>
       </Title>
-      <Text ta="center" size="lg" maw={580} mx="auto" mt="xl">
+      <Text
+        p="md"
+        style={{
+          borderRadius: 25,
+        }}
+        ta="center"
+        size="lg"
+        maw={580}
+        mx="auto"
+        mt="xl"
+      >
         Nietzsche once said, &quot;He who fights with monsters should look to it that he himself
         does not become a monster. And if you gaze long into an abyss, the abyss also gazes into
         you.&quot;
