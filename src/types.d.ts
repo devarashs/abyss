@@ -4,6 +4,8 @@ interface UserInfo {
   email: string;
   preferredCurrency: string;
   isAdmine: boolean;
+  isCreator: boolean;
+  abyssBalance: number;
   token: string;
 }
 

@@ -11,6 +11,7 @@ import { Button, Menu, Text, rem, useMantineColorScheme } from '@mantine/core';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserInfo, signOut } from '../../Store';
+import { Link } from 'react-router-dom';
 import { COLORS } from '../../constants/themeStatics';
 
 export function HeaderMenu() {
@@ -43,15 +44,24 @@ export function HeaderMenu() {
 
       <Menu.Dropdown>
         <Menu.Label>Abyss</Menu.Label>
+
         {!userInfo && (
           <>
-            <a style={{ textDecoration: 'none', color: 'inherit' }} href="/login">
+            {/*Define Routes For Only Unauthenticated User Here */}
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/login">
               <Menu.Item leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
                 Log in
               </Menu.Item>
-            </a>
+            </Link>
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/signup">
+              <Menu.Item leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
+                Sign Up Now!
+              </Menu.Item>
+            </Link>
           </>
         )}
+
+        {/*Define Public Routes Here */}
 
         <Menu.Item leftSection={<IconMessageCircle style={{ width: rem(14), height: rem(14) }} />}>
           News
@@ -69,22 +79,30 @@ export function HeaderMenu() {
         >
           Search
         </Menu.Item>
+
+        {/*Define User Authenticated Routes Here */}
+
         {userInfo && (
           <>
-            <a style={{ textDecoration: 'none', color: 'inherit' }} href="/login">
+            {/*Define Creator Routes Here*/}
+
+            {userInfo.isCreator && (
+              <Link to="/creator/dashboard">
+                <Menu.Item
+                  leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
+                >
+                  Creator Dashboard
+                </Menu.Item>
+              </Link>
+            )}
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/login">
               <Menu.Item
                 onClick={() => SignOutHandler()}
                 leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
               >
                 Sign Out
               </Menu.Item>
-            </a>
-          </>
-        )}
-
-        <Menu.Divider />
-        {userInfo && (
-          <>
+            </Link>
             <Menu.Label>Danger zone</Menu.Label>
             <Menu.Item
               color="red"

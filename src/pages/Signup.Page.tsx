@@ -10,7 +10,7 @@ import {
   Title,
   useMantineColorScheme,
 } from '@mantine/core';
-import { isEmail, isNotEmpty, useForm } from '@mantine/form';
+import { isEmail, isNotEmpty, matchesField, useForm } from '@mantine/form';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ import { getError } from '../utiles';
 import { COLORS } from '../constants/themeStatics';
 import axios from '../axios';
 
-export function LoginPage() {
+export function SignupPage() {
   const { colorScheme } = useMantineColorScheme();
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -30,15 +30,19 @@ export function LoginPage() {
   const userInfo = useSelector(selectUserInfo);
   const form = useForm({
     initialValues: {
+      name: '',
       email: '',
       password: '',
+      confirmPassword: '',
       terms: false,
     },
 
     validate: {
+      name: isNotEmpty('Please Enter a Name'),
       email: isEmail('Enter A Correct email address'),
-      password: isNotEmpty('You Need to Have an Password!'),
-      terms: (value) => (value ? null : 'You Must Be a Good Person To Use Our Services!'),
+      password: isNotEmpty('You Need to Have a Password!'),
+      confirmPassword: matchesField('password', 'Passwords are not the same'),
+      terms: (value) => (value === false ? 'You Must Agree To Be A Good Person!' : null),
     },
   });
   useEffect(() => {
@@ -48,14 +52,21 @@ export function LoginPage() {
   }, [navigate, redirect, userInfo]);
 
   const submitHandler = async () => {
+    console.log('yo im here');
+    if (form.values.password !== form.values.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
     try {
-      const { data } = await axios.post('/users/signin', {
+      const { data } = await axios.post('/users/signup', {
+        name: form.values.name,
         email: form.values.email,
         password: form.values.password,
       });
       dispatch(signIn(data));
+
       localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
+      navigate(redirect || '/user/dashboard');
     } catch (err: unknown) {
       if (err instanceof Error) {
         toast.error(getError(err));
@@ -88,7 +99,8 @@ export function LoginPage() {
             order={2}
             size={15}
           >
-            Please Login to Your Account!
+            Make an Account To Participate in Testing Of Alpha Versions. For Higher Access Accounts
+            Contact <a href="https://discord.gg/CdSsAYzpd4">Discord</a>
           </Title>
           <form
             style={{
@@ -98,6 +110,13 @@ export function LoginPage() {
             }}
             onSubmit={form.onSubmit(() => submitHandler())}
           >
+            <TextInput
+              type="text"
+              withAsterisk
+              label="Your Name"
+              placeholder="Your Name"
+              {...form.getInputProps('name')}
+            />
             <TextInput
               type="email"
               withAsterisk
@@ -112,6 +131,13 @@ export function LoginPage() {
               placeholder="Your Password"
               {...form.getInputProps('password')}
             />
+            <TextInput
+              type="password"
+              withAsterisk
+              label="Confirm Password"
+              placeholder="Confirm Password"
+              {...form.getInputProps('confirmPassword')}
+            />
 
             <Checkbox
               {...form.getInputProps('terms')}
@@ -124,7 +150,7 @@ export function LoginPage() {
                 color={colorScheme === 'dark' ? COLORS.lightviolet : COLORS.violet}
                 type="submit"
               >
-                Login
+                Sign up
               </Button>
             </Group>
           </form>
@@ -137,11 +163,13 @@ export function LoginPage() {
             borderRadius: 45,
           }}
         >
-          In 1956, a group of researchers including John McCarthy, Marvin Minsky, Nathaniel
-          Rochester, and Claude Shannon organized the Dartmouth Workshop, marking the birth of
-          artificial intelligence (AI) and machine learning. They believed that &quot;every aspect
-          of learning or any other feature of intelligence can in principle be so precisely
-          described that a machine can be made to simulate it.&quot;
+          By Making An Account You Will Get 1024 Pixels , Which is the Imaginary Currency We Will Be
+          Using in Transactions. You Can Only Earn Pixels By Playing. During This Development Time ,
+          You can Make as Many Accounts as You Want , Know that User Data Collected in Alpha
+          Versions Can Be Deleted At Anytime , And The Cards And Assets Will Be Changed Constantly ,
+          Please Give Any idea Or Recommendations That You Have in The{' '}
+          <a href="https://discord.gg/CdSsAYzpd4">Discord</a> Server.{' '}
+          <a href="https://github.com/devarashs">devarash</a>
         </Text>
       </Flex>
     </Container>
