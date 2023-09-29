@@ -14,13 +14,15 @@ import { CreatorDashboard } from './pages/CreatorDashboard';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { LoginPage } from './pages/Login.Page';
 import { SignupPage } from './pages/Signup.Page';
+import { CreateCardPage } from './pages/CreateCard.Page';
+import { CardGalleyPage } from './pages/CardGalley.Page';
 
 export default function App() {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
 
   return (
     <BrowserRouter>
-      <AppShell padding="md" header={{ height: 85 }}>
+      <AppShell padding="md" header={{ height: 85 }} footer={{ height: 50 }}>
         <AppShell.Header
           m="xs"
           p="md"
@@ -101,10 +103,26 @@ export default function App() {
               }
             />
             <Route
+              path="/cards/gallery"
+              element={
+                <ProtectedRoute>
+                  <CardGalleyPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/creator/dashboard"
               element={
                 <ProtectedRoute>
                   <CreatorDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/creator/createnewcard"
+              element={
+                <ProtectedRoute>
+                  <CreateCardPage />
                 </ProtectedRoute>
               }
             />
@@ -128,6 +146,20 @@ export default function App() {
           </Routes>
           {/* <Router /> */}
         </AppShell.Main>
+        <AppShell.Footer
+          style={{ justifyContent: 'center', alignItems: 'center', width: '100%' }}
+          p="md"
+        >
+          <Text ta="center">
+            &copy; {new Date().getFullYear()} Abyss all rights reserved - Find The Source Code{' '}
+            <a
+              style={{ color: colorScheme === 'dark' ? COLORS.violet : COLORS.lightviolet }}
+              href="https://github.com/devarashs/abyss"
+            >
+              Here
+            </a>
+          </Text>
+        </AppShell.Footer>
       </AppShell>
     </BrowserRouter>
   );

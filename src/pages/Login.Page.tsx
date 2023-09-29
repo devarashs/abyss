@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 import { selectUserInfo, signIn } from '../Store';
 import { getError } from '../utiles';
 import { COLORS } from '../constants/themeStatics';
@@ -63,87 +64,92 @@ export function LoginPage() {
     }
   };
   return (
-    <Container
-      my="xl"
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Flex
-        justify={{ base: 'center', md: 'space-between' }}
-        align="center"
-        gap={20}
-        direction={{ base: 'column', md: 'row' }}
+    <>
+      <Helmet>
+        <title>Login Page</title>
+      </Helmet>
+      <Container
+        my="xl"
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
-        <Box w={{ base: '90vw', md: '60vw' }}>
-          <Title
-            my="lg"
+        <Flex
+          justify={{ base: 'center', md: 'space-between' }}
+          align="center"
+          gap={20}
+          direction={{ base: 'column', md: 'row' }}
+        >
+          <Box w={{ base: '90vw', md: '60vw' }}>
+            <Title
+              my="lg"
+              style={{
+                backgroundColor: colorScheme === 'dark' ? COLORS.violet : COLORS.lightviolet,
+                borderRadius: 45,
+              }}
+              p="md"
+              ta="center"
+              order={2}
+              size={15}
+            >
+              Please Login to Your Account!
+            </Title>
+            <form
+              style={{
+                backgroundColor: colorScheme === 'dark' ? COLORS.violet : COLORS.lightviolet,
+                padding: 20,
+                borderRadius: 15,
+              }}
+              onSubmit={form.onSubmit(() => submitHandler())}
+            >
+              <TextInput
+                type="email"
+                withAsterisk
+                label="Email"
+                placeholder="Your Email"
+                {...form.getInputProps('email')}
+              />
+              <TextInput
+                type="password"
+                withAsterisk
+                label="Password"
+                placeholder="Your Password"
+                {...form.getInputProps('password')}
+              />
+
+              <Checkbox
+                {...form.getInputProps('terms')}
+                mt="md"
+                label="I agree to Be a Good Person!"
+              />
+
+              <Group justify="flex-end" mt="md">
+                <Button
+                  color={colorScheme === 'dark' ? COLORS.lightviolet : COLORS.violet}
+                  type="submit"
+                >
+                  Login
+                </Button>
+              </Group>
+            </form>
+          </Box>
+          <Text
+            w={{ base: '90vw', md: '60vw' }}
+            p="lg"
             style={{
               backgroundColor: colorScheme === 'dark' ? COLORS.violet : COLORS.lightviolet,
               borderRadius: 45,
             }}
-            p="md"
-            ta="center"
-            order={2}
-            size={15}
           >
-            Please Login to Your Account!
-          </Title>
-          <form
-            style={{
-              backgroundColor: colorScheme === 'dark' ? COLORS.violet : COLORS.lightviolet,
-              padding: 20,
-              borderRadius: 15,
-            }}
-            onSubmit={form.onSubmit(() => submitHandler())}
-          >
-            <TextInput
-              type="email"
-              withAsterisk
-              label="Email"
-              placeholder="Your Email"
-              {...form.getInputProps('email')}
-            />
-            <TextInput
-              type="password"
-              withAsterisk
-              label="Password"
-              placeholder="Your Password"
-              {...form.getInputProps('password')}
-            />
-
-            <Checkbox
-              {...form.getInputProps('terms')}
-              mt="md"
-              label="I agree to Be a Good Person!"
-            />
-
-            <Group justify="flex-end" mt="md">
-              <Button
-                color={colorScheme === 'dark' ? COLORS.lightviolet : COLORS.violet}
-                type="submit"
-              >
-                Login
-              </Button>
-            </Group>
-          </form>
-        </Box>
-        <Text
-          w={{ base: '90vw', md: '60vw' }}
-          p="lg"
-          style={{
-            backgroundColor: colorScheme === 'dark' ? COLORS.violet : COLORS.lightviolet,
-            borderRadius: 45,
-          }}
-        >
-          In 1956, a group of researchers including John McCarthy, Marvin Minsky, Nathaniel
-          Rochester, and Claude Shannon organized the Dartmouth Workshop, marking the birth of
-          artificial intelligence (AI) and machine learning. They believed that &quot;every aspect
-          of learning or any other feature of intelligence can in principle be so precisely
-          described that a machine can be made to simulate it.&quot;
-        </Text>
-      </Flex>
-    </Container>
+            In 1956, a group of researchers including John McCarthy, Marvin Minsky, Nathaniel
+            Rochester, and Claude Shannon organized the Dartmouth Workshop, marking the birth of
+            artificial intelligence (AI) and machine learning. They believed that &quot;every aspect
+            of learning or any other feature of intelligence can in principle be so precisely
+            described that a machine can be made to simulate it.&quot;
+          </Text>
+        </Flex>
+      </Container>
+    </>
   );
 }

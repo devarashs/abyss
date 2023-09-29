@@ -10,8 +10,8 @@ import {
 import { Button, Menu, Text, rem, useMantineColorScheme } from '@mantine/core';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserInfo, signOut } from '../../Store';
 import { Link } from 'react-router-dom';
+import { selectUserInfo, signOut } from '../../Store';
 import { COLORS } from '../../constants/themeStatics';
 
 export function HeaderMenu() {
@@ -66,9 +66,11 @@ export function HeaderMenu() {
         <Menu.Item leftSection={<IconMessageCircle style={{ width: rem(14), height: rem(14) }} />}>
           News
         </Menu.Item>
-        <Menu.Item leftSection={<IconPhoto style={{ width: rem(14), height: rem(14) }} />}>
-          Gallery
-        </Menu.Item>
+        <Link to="/cards/gallery">
+          <Menu.Item leftSection={<IconPhoto style={{ width: rem(14), height: rem(14) }} />}>
+            Card Gallery
+          </Menu.Item>
+        </Link>
         <Menu.Item
           leftSection={<IconSearch style={{ width: rem(14), height: rem(14) }} />}
           rightSection={
