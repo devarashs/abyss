@@ -1,0 +1,6 @@
+.BasicFrameContainer {
+  background: light-dark(
+    repeating-linear-gradient(to right, rgb(97, 36, 196), rgb(186, 157, 233)),
+    repeating-linear-gradient(to right, rgb(97, 36, 196), rgb(41, 34, 53))
+  );
+}

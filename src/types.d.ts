@@ -23,3 +23,10 @@ type CustomError = {
       | undefined;
   };
 };
+
+interface CardProps {
+  image: string;
+  name: string;
+  description: string;
+  level: number;
+}

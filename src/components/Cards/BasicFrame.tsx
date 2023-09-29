@@ -1,32 +1,33 @@
-import { Badge, Button, Card, Group, Image, Text } from '@mantine/core';
+import { Badge, Card, Group, Image, Text } from '@mantine/core';
 import React from 'react';
+import { motion } from 'framer-motion';
+import styles from './Frames.module.css';
 
-export function BasicFrame() {
+export function BasicFrame({ card }: { card: CardProps }) {
   return (
-    <Card w={{ base: '100%', md: '25%' }} shadow="sm" padding="lg" radius="md" withBorder>
-      <Card.Section>
-        <Image
-          src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-          height={160}
-          alt="Norway"
-        />
-      </Card.Section>
+    <Card
+      className={styles.BasicFrameContainer}
+      w={{ base: '100%', md: '25%' }}
+      shadow="lg"
+      padding="lg"
+      radius="md"
+      withBorder
+    >
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.96 }}
+        style={{ backgroundColor: 'inherit' }}
+      >
+        <Image style={{ objectFit: 'fill', borderRadius: 25 }} src={card.image} alt="Norway" />
 
-      <Group justify="space-between" mt="md" mb="xs">
-        <Text fw={500}>Norway Fjord Adventures</Text>
-        <Badge color="pink" variant="light">
-          On Sale
-        </Badge>
-      </Group>
-
-      <Text size="sm" c="dimmed">
-        With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-        activities on and around the fjords of Norway
-      </Text>
-
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-        Book classic tour now
-      </Button>
+        <Group justify="space-between" mt="md" mb="xs">
+          <Text fw={500}>{card.name}</Text>
+          <Badge color="pink" variant="light">
+            {card.level}
+          </Badge>
+        </Group>
+        <Text size="sm">{card.description}</Text>
+      </motion.div>
     </Card>
   );
 }
