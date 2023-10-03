@@ -5,6 +5,7 @@ import { ProtectedRoute } from './ProtectedRoute.tsx/ProtectedRoute';
 import { CreatorSidePanel } from './Creators/CreatorSidePanel/CreatorSidePanel';
 import { BasicFrame } from './Cards/BasicFrame';
 import { HomeCardPreview } from './HomeCardPreview/HomeCardPreview';
+import { Gallery } from './Gallery/Gallery';
 
 export {
   Welcome,
@@ -14,4 +15,5 @@ export {
   CreatorSidePanel,
   BasicFrame,
   HomeCardPreview,
+  Gallery,
 };

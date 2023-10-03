@@ -102,14 +102,7 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/cards/gallery"
-              element={
-                <ProtectedRoute>
-                  <CardGalleyPage />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/cards/gallery" element={<CardGalleyPage />} />
             <Route
               path="/creator/dashboard"
               element={

@@ -19,3 +19,8 @@ export const Panel = [
     route: '/creator/tops',
   },
 ];
+
+export const FrameSelection = [
+  { label: 'Basic Frames', value: '0' },
+  { label: 'Elemental Frame', value: '1' },
+];

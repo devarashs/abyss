@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { AxiosResponse } from 'axios';
-import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import axios from '../axios';
-import { selectUserInfo } from '../Store';
 import { getError } from '../utiles';
+import { selectUserInfo } from '../Store';
 
-const useFetch = (requestQuery: string) => {
+export const useAuthFetch = (requestQuery: string) => {
   const [data, setData] = useState<[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -20,9 +20,7 @@ const useFetch = (requestQuery: string) => {
 
     setIsLoading(true);
     try {
-      const response: AxiosResponse = await axios.get(requestQuery, {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      });
+      const response: AxiosResponse = await axios.get(requestQuery);
       setData(response.data);
 
       setIsLoading(false);
@@ -45,5 +43,3 @@ const useFetch = (requestQuery: string) => {
 
   return { data, isLoading, error, refetch };
 };
-
-export default useFetch;

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Flex, LoadingOverlay, Text } from '@mantine/core';
 import { BasicFrame } from '../Cards/BasicFrame';
-
-import useFetch from '../../hooks/useFetch';
 import { COLORS } from '../../constants/themeStatics';
+import { useUnAuthFetch } from '../../hooks/useUnAuthFetch';
 
 export function HomeCardPreview() {
-  const cards = useFetch('/cards/');
+  const cards = useUnAuthFetch('/cards/');
   return cards.isLoading ? (
     <LoadingOverlay color={COLORS.violet} />
   ) : cards.error ? (
