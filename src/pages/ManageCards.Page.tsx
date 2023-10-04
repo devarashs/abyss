@@ -1,5 +1,4 @@
 import { Flex, LoadingOverlay, Text } from '@mantine/core';
-import { toast } from 'react-toastify';
 import { useAuthFetch } from '../hooks/useAuthFetch';
 import { COLORS } from '../constants/themeStatics';
 import { Gallery } from '../components';
@@ -9,7 +8,7 @@ export function ManageCards() {
   return cards.isLoading ? (
     <LoadingOverlay color={COLORS.violet} />
   ) : cards.error ? (
-    toast.error('Error Trace to P-MC')
+    <Text>Error Trace to P-MC</Text>
   ) : cards.data.length > 0 ? (
     <Flex justify="center" direction="column">
       <Gallery requestQuery="/cards/mycreations" />
