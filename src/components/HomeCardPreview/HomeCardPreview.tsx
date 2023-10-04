@@ -2,10 +2,10 @@ import React from 'react';
 import { Flex, LoadingOverlay, Text } from '@mantine/core';
 import { BasicFrame } from '../Cards/BasicFrame';
 import { COLORS } from '../../constants/themeStatics';
-import { useUnAuthFetch } from '../../hooks/useUnAuthFetch';
+import { useAuthFetch } from '../../hooks/useAuthFetch';
 
 export function HomeCardPreview() {
-  const cards = useUnAuthFetch('/cards/');
+  const cards = useAuthFetch('/cards/');
   return cards.isLoading ? (
     <LoadingOverlay color={COLORS.violet} />
   ) : cards.error ? (
@@ -19,11 +19,9 @@ export function HomeCardPreview() {
       direction={{ base: 'column', md: 'row' }}
     >
       {cards.data.length > 0 &&
-        cards.data.slice(0, 3).map((card) => (
-          <>
-            <BasicFrame key={(card as CardProps).name} card={card} />
-          </>
-        ))}
+        cards.data
+          .slice(0, 3)
+          .map((card) => <BasicFrame key={(card as CardProps).name} card={card} />)}
     </Flex>
   );
 }

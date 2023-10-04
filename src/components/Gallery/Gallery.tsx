@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Flex, LoadingOverlay, Pagination, Text } from '@mantine/core';
+import { Center, Flex, LoadingOverlay, Pagination, Text } from '@mantine/core';
 import { BasicFrame } from '../Cards/BasicFrame';
 import { COLORS } from '../../constants/themeStatics';
-import { useUnAuthFetch } from '../../hooks/useUnAuthFetch';
+import { useAuthFetch } from '../../hooks/useAuthFetch';
 
-export function Gallery() {
-  const cards = useUnAuthFetch('/cards/');
+export function Gallery({ requestQuery }: { requestQuery: string }) {
+  const cards = useAuthFetch(requestQuery);
   const [activePage, setPage] = useState(1);
   return cards.isLoading ? (
     <LoadingOverlay color={COLORS.violet} />
@@ -22,13 +22,13 @@ export function Gallery() {
         direction={{ base: 'column', md: 'row' }}
       >
         {cards.data.length > 0 &&
-          cards.data.slice((activePage - 1) * 10, (activePage - 1) * 10 + 9).map((card) => (
-            <>
-              <BasicFrame key={(card as CardProps).name} card={card} />
-            </>
-          ))}
+          cards.data
+            .slice((activePage - 1) * 10, (activePage - 1) * 10 + 9)
+            .map((card, index) => <BasicFrame key={index} card={card} />)}
       </Flex>
-      <Pagination value={activePage} onChange={setPage} total={cards.data.length / 15 + 1} />
+      <Center>
+        <Pagination value={activePage} onChange={setPage} total={cards.data.length / 9 + 1} />
+      </Center>
     </>
   );
 }

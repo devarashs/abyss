@@ -13,14 +13,11 @@ export const useAuthFetch = (requestQuery: string) => {
   const userInfo = useSelector(selectUserInfo);
 
   const fetchData = async () => {
-    if (!userInfo) {
-      // Handle the case when userInfo is null
-      return;
-    }
-
     setIsLoading(true);
     try {
-      const response: AxiosResponse = await axios.get(requestQuery);
+      const response: AxiosResponse = await axios.get(requestQuery, {
+        headers: { Authorization: `Bearer ${userInfo?.token}` },
+      });
       setData(response.data);
 
       setIsLoading(false);

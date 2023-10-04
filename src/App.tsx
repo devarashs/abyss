@@ -16,6 +16,7 @@ import { LoginPage } from './pages/Login.Page';
 import { SignupPage } from './pages/Signup.Page';
 import { CreateCardPage } from './pages/CreateCard.Page';
 import { CardGalleryPage } from './pages/CardGallery.Page';
+import { ManageCards } from './pages/ManageCards.Page';
 
 export default function App() {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -120,14 +121,21 @@ export default function App() {
               }
             />
             <Route
-              path="/admin/dashboard"
+              path="/creator/dashboard"
               element={
                 <ProtectedRoute>
                   <CreatorDashboard />
                 </ProtectedRoute>
               }
             />
-
+            <Route
+              path="/creator/managecards"
+              element={
+                <ProtectedRoute>
+                  <ManageCards />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/admin/dashboard"
               element={
