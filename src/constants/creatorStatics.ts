@@ -21,6 +21,6 @@ export const Panel = [
 ];
 
 export const FrameSelection = [
-  { label: 'Basic Frames', value: '0' },
-  { label: 'Elemental Frame', value: '1' },
+  { label: 'Basic', value: '0' },
+  { label: 'Elemental', value: '1' },
 ];

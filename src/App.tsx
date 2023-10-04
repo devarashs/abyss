@@ -15,7 +15,7 @@ import { AdminDashboard } from './pages/AdminDashboard';
 import { LoginPage } from './pages/Login.Page';
 import { SignupPage } from './pages/Signup.Page';
 import { CreateCardPage } from './pages/CreateCard.Page';
-import { CardGalleyPage } from './pages/CardGalley.Page';
+import { CardGalleryPage } from './pages/CardGallery.Page';
 
 export default function App() {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -102,7 +102,7 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/cards/gallery" element={<CardGalleyPage />} />
+            <Route path="/cards/gallery" element={<CardGalleryPage />} />
             <Route
               path="/creator/dashboard"
               element={

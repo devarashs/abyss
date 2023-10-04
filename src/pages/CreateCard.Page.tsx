@@ -1,11 +1,11 @@
 import {
   Button,
-  Checkbox,
   Container,
   Divider,
   Flex,
   Group,
   Image,
+  NativeSelect,
   TextInput,
   Title,
   useMantineColorScheme,
@@ -20,6 +20,7 @@ import { selectUserInfo } from '../Store';
 import axios from '../axios';
 import { COLORS, SIZES } from '../constants/themeStatics';
 import imagethumbnail from '../../images/blackbackground.jpg';
+import { FrameSelection } from '../constants/creatorStatics';
 
 export function CreateCardPage() {
   const [loading, setLoading] = useState(false);
@@ -34,25 +35,9 @@ export function CreateCardPage() {
       class: '',
       category: '',
       value: '',
-      usageCost: '',
       rareity: '',
       description: '',
-      guild: '',
-      skills: '',
-      role: '',
-      soul: false,
-      sentient: false,
-      hiddenMessage: '',
-      magic: '',
-      mana: '',
-      intelligence: '',
-      kindness: '',
-      merciness: '',
-      weaponCombatLevel: '',
-      magicCombatLevel: '',
-      strategicCombatLevel: '',
-      sacrificeLevel: '',
-      confidenceLevel: '',
+      frameType: '',
     },
 
     validate: {
@@ -61,23 +46,9 @@ export function CreateCardPage() {
       class: isNotEmpty('Can not be Empty'),
       category: isNotEmpty('Can not be Empty'),
       value: isNotEmpty('Can not be Empty'),
-      usageCost: isNotEmpty('Can not be Empty'),
       rareity: isNotEmpty('Can not be Empty'),
       description: isNotEmpty('Can not be Empty'),
-      guild: isNotEmpty('Can not be Empty'),
-      skills: isNotEmpty('Can not be Empty'),
-      role: isNotEmpty('Can not be Empty'),
-      hiddenMessage: isNotEmpty('Can not be Empty'),
-      magic: isNotEmpty('Can not be Empty'),
-      mana: isNotEmpty('Can not be Empty'),
-      intelligence: isNotEmpty('Can not be Empty'),
-      kindness: isNotEmpty('Can not be Empty'),
-      merciness: isNotEmpty('Can not be Empty'),
-      weaponCombatLevel: isNotEmpty('Can not be Empty'),
-      magicCombatLevel: isNotEmpty('Can not be Empty'),
-      strategicCombatLevel: isNotEmpty('Can not be Empty'),
-      sacrificeLevel: isNotEmpty('Can not be Empty'),
-      confidenceLevel: isNotEmpty('Can not be Empty'),
+      frameType: isNotEmpty('Can not be Empty'),
     },
   });
 
@@ -100,25 +71,9 @@ export function CreateCardPage() {
           class: form.values.class,
           category: form.values.category,
           value: form.values.value,
-          usageCost: form.values.usageCost,
           rareity: form.values.rareity,
           description: form.values.description,
-          guild: form.values.guild,
-          skills: form.values.skills,
-          role: form.values.role,
-          soul: form.values.soul,
-          sentient: form.values.sentient,
-          hiddenMessage: form.values.hiddenMessage,
-          magic: form.values.magic,
-          mana: form.values.mana,
-          intelligence: form.values.intelligence,
-          kindness: form.values.kindness,
-          merciness: form.values.merciness,
-          weaponCombatLevel: form.values.weaponCombatLevel,
-          magicCombatLevel: form.values.magicCombatLevel,
-          strategicCombatLevel: form.values.strategicCombatLevel,
-          sacrificeLevel: form.values.sacrificeLevel,
-          confidenceLevel: form.values.confidenceLevel,
+          frameType: form.values.frameType,
           owner: userInfo._id,
         },
         {
@@ -236,13 +191,6 @@ export function CreateCardPage() {
               {...form.getInputProps('value')}
             />
             <TextInput
-              type="number"
-              my="sm"
-              withAsterisk
-              label="Usage Cost ( Based on Pixels )"
-              {...form.getInputProps('usageCost')}
-            />
-            <TextInput
               my="sm"
               type="text"
               withAsterisk
@@ -255,116 +203,14 @@ export function CreateCardPage() {
               label="Description"
               {...form.getInputProps('description')}
             />
-            <TextInput
-              my="sm"
-              type="text"
-              withAsterisk
-              label="Guild"
-              {...form.getInputProps('guild')}
-            />
-            <TextInput
-              my="sm"
-              type="text"
-              withAsterisk
-              label="Skills"
-              {...form.getInputProps('skills')}
-            />
 
-            <TextInput
-              my="sm"
-              type="text"
-              withAsterisk
-              label="Role"
-              {...form.getInputProps('role')}
+            <NativeSelect
+              w={{ base: '100%', md: '50%' }}
+              label="Choose Frame Type"
+              my="md"
+              data={FrameSelection}
+              {...form.getInputProps('frameType')}
             />
-            <TextInput
-              type="text"
-              my="sm"
-              withAsterisk
-              label="Hidden Message"
-              {...form.getInputProps('hiddenMessage')}
-            />
-            <TextInput
-              my="sm"
-              type="number"
-              withAsterisk
-              label="Magic"
-              {...form.getInputProps('magic')}
-            />
-            <TextInput
-              my="sm"
-              type="number"
-              withAsterisk
-              label="Mana"
-              {...form.getInputProps('mana')}
-            />
-            <TextInput
-              my="sm"
-              type="number"
-              withAsterisk
-              label="Intelligence"
-              {...form.getInputProps('intelligence')}
-            />
-            <TextInput
-              my="sm"
-              type="number"
-              withAsterisk
-              label="Kindness"
-              {...form.getInputProps('kindness')}
-            />
-            <TextInput
-              my="sm"
-              type="number"
-              withAsterisk
-              label="Merciness"
-              {...form.getInputProps('merciness')}
-            />
-            <TextInput
-              type="number"
-              my="sm"
-              withAsterisk
-              label="Weapon Combat Level"
-              {...form.getInputProps('weaponCombatLevel')}
-            />
-            <TextInput
-              type="number"
-              my="sm"
-              withAsterisk
-              label="Magic Combat Level"
-              {...form.getInputProps('magicCombatLevel')}
-            />
-            <TextInput
-              type="number"
-              my="sm"
-              withAsterisk
-              label="Strategic Combat Level"
-              {...form.getInputProps('strategicCombatLevel')}
-            />
-            <TextInput
-              type="number"
-              my="sm"
-              withAsterisk
-              label="Sacrifice Level"
-              {...form.getInputProps('sacrificeLevel')}
-            />
-            <TextInput
-              type="number"
-              my="sm"
-              withAsterisk
-              label="Confidence Level"
-              {...form.getInputProps('confidenceLevel')}
-            />
-            <Checkbox
-              mt="md"
-              label="Does The Hero Has Soul ?"
-              {...form.getInputProps('soul', { type: 'checkbox' })}
-            />
-            <Checkbox
-              mt="md"
-              label="Is The Hero Sentient ?"
-              {...form.getInputProps('sentient', { type: 'checkbox' })}
-            />
-
             <Group justify="flex-end" mt="md">
               <Button
                 loading={loading}
