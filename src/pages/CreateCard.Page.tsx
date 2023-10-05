@@ -22,7 +22,7 @@ import { COLORS, SIZES } from '../constants/themeStatics';
 import imagethumbnail from '../../images/blackbackground.jpg';
 import { FrameSelection } from '../constants/creatorStatics';
 
-export function CreateCardPage() {
+export default function CreateCardPage() {
   const [loading, setLoading] = useState(false);
   const [uploadloading, setUploadLoading] = useState(false);
   const [ImageUploaded, setImageUploaded] = useState('empty');

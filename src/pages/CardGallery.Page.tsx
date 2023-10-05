@@ -3,7 +3,7 @@ import { Center, Flex, NativeSelect } from '@mantine/core';
 import { Gallery } from '../components';
 import { FrameSelection } from '../constants/creatorStatics';
 
-export function CardGalleryPage() {
+export default function CardGalleryPage() {
   return (
     <Flex w="100%" justify="center" direction="column">
       <Center>

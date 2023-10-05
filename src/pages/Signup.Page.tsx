@@ -21,7 +21,7 @@ import { getError } from '../utiles';
 import { COLORS } from '../constants/themeStatics';
 import axios from '../axios';
 
-export function SignupPage() {
+export default function SignupPage() {
   const { colorScheme } = useMantineColorScheme();
   const navigate = useNavigate();
   const { search } = useLocation();

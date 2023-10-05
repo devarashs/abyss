@@ -3,7 +3,7 @@ import { useAuthFetch } from '../hooks/useAuthFetch';
 import { COLORS } from '../constants/themeStatics';
 import { Gallery } from '../components';
 
-export function ManageCards() {
+export default function ManageCards() {
   const cards = useAuthFetch('/cards/mycreations');
   return cards.isLoading ? (
     <LoadingOverlay color={COLORS.violet} />

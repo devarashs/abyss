@@ -2,7 +2,7 @@ import { Flex } from '@mantine/core';
 import { Helmet } from 'react-helmet-async';
 import { About, HomeCardPreview, Welcome } from '../components';
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <>
       <Helmet>

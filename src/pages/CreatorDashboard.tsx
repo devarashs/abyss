@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { CreatorSidePanel } from '../components';
 
-export function CreatorDashboard() {
+export default function CreatorDashboard() {
   return (
     <>
       <Helmet>
