@@ -12,7 +12,7 @@ export function HomeCardPreview() {
     <Text>Something Went Wrong Trace Back to C-HCP</Text>
   ) : (
     <Flex
-      gap="md"
+      w="100vw"
       wrap="wrap"
       justify="space-evenly"
       align="center"
@@ -21,7 +21,9 @@ export function HomeCardPreview() {
       {cards.data.length > 0 &&
         cards.data
           .slice(0, 3)
-          .map((card) => <BasicFrame key={(card as CardProps).name} card={card} />)}
+          .map((card, index) => (
+            <BasicFrame index={index} key={(card as CardProps).name} card={card} />
+          ))}
     </Flex>
   );
 }

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Center, Flex, LoadingOverlay, Pagination, Text } from '@mantine/core';
 import { BasicFrame } from '../Cards/BasicFrame';
 import { COLORS } from '../../constants/themeStatics';
-import { useAuthFetch } from '../../hooks/useAuthFetch';
+import { useFilteredFetch } from '../../hooks/useFilteredFetch';
 
-export function Gallery({ requestQuery }: { requestQuery: string }) {
-  const cards = useAuthFetch(requestQuery);
+export function Gallery({
+  filter,
+  requestQuery,
+}: {
+  filter: { frameType: string };
+  requestQuery: string;
+}) {
+  const cards = useFilteredFetch(`${requestQuery}/filter`, filter);
   const [activePage, setPage] = useState(1);
+
+  useEffect(() => {
+    cards.refetch();
+  }, [filter]);
+
   return cards.isLoading ? (
     <LoadingOverlay color={COLORS.violet} />
   ) : cards.error ? (
@@ -14,6 +25,7 @@ export function Gallery({ requestQuery }: { requestQuery: string }) {
   ) : (
     <>
       <Flex
+        p="sm"
         my="md"
         gap="md"
         wrap="wrap"
@@ -23,11 +35,16 @@ export function Gallery({ requestQuery }: { requestQuery: string }) {
       >
         {cards.data.length > 0 &&
           cards.data
-            .slice((activePage - 1) * 10, (activePage - 1) * 10 + 9)
-            .map((card, index) => <BasicFrame key={index} card={card} />)}
+            .slice((activePage - 1) * 12, (activePage - 1) * 12 + 12)
+            .map((card, index) => <BasicFrame index={index} key={index} card={card} />)}
       </Flex>
       <Center>
-        <Pagination value={activePage} onChange={setPage} total={cards.data.length / 9 + 1} />
+        <Pagination
+          color={COLORS.violet}
+          value={activePage}
+          onChange={setPage}
+          total={cards.data.length / 13 + 1}
+        />
       </Center>
     </>
   );

@@ -16,20 +16,12 @@ import { COLORS } from './constants/themeStatics';
 import { HeaderMenu } from './components/HeaderMenu/HeaderMenu';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.module.css';
-import { ProtectedRoute } from './components';
-// import { HomePage } from './pages/Home.page';
-// import { UserDashboard } from './pages/UserDashboard';
-// import { CreatorDashboard } from './pages/CreatorDashboard';
-// import { AdminDashboard } from './pages/AdminDashboard';
-// import { LoginPage } from './pages/Login.Page';
-// import { SignupPage } from './pages/Signup.Page';
-// import { CreateCardPage } from './pages/CreateCard.Page';
-// import { CardGalleryPage } from './pages/CardGallery.Page';
-// import { ManageCards } from './pages/ManageCards.Page';
+import { AdminProtection, CreatorProtection, ProtectedRoute } from './components';
 
 export default function App() {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
 
+  //code spliting based on pages , lazy load them to avoid loading them when it is unnecessary
   //lazy load all pages before giving it to the routes component , use this area to define the pages
 
   const HomePage = lazy(() => import('./pages/Home.page'));
@@ -41,6 +33,7 @@ export default function App() {
   const CreateCardPage = lazy(() => import('./pages/CreateCard.Page'));
   const CardGalleryPage = lazy(() => import('./pages/CardGallery.Page'));
   const ManageCards = lazy(() => import('./pages/ManageCards.Page'));
+  const CardPage = lazy(() => import('./pages/Card.Page'));
 
   return (
     <BrowserRouter>
@@ -129,41 +122,49 @@ export default function App() {
               <Route
                 path="/creator/dashboard"
                 element={
-                  <ProtectedRoute>
+                  <CreatorProtection>
                     <CreatorDashboard />
-                  </ProtectedRoute>
+                  </CreatorProtection>
                 }
               />
               <Route
                 path="/creator/createnewcard"
                 element={
-                  <ProtectedRoute>
+                  <CreatorProtection>
                     <CreateCardPage />
-                  </ProtectedRoute>
+                  </CreatorProtection>
                 }
               />
               <Route
                 path="/creator/dashboard"
                 element={
-                  <ProtectedRoute>
+                  <CreatorProtection>
                     <CreatorDashboard />
-                  </ProtectedRoute>
+                  </CreatorProtection>
                 }
               />
               <Route
                 path="/creator/managecards"
                 element={
-                  <ProtectedRoute>
+                  <CreatorProtection>
                     <ManageCards />
-                  </ProtectedRoute>
+                  </CreatorProtection>
+                }
+              />
+              <Route
+                path="/creator/managecards/:id"
+                element={
+                  <CreatorProtection>
+                    <CardPage />
+                  </CreatorProtection>
                 }
               />
               <Route
                 path="/admin/dashboard"
                 element={
-                  <ProtectedRoute>
+                  <AdminProtection>
                     <AdminDashboard />
-                  </ProtectedRoute>
+                  </AdminProtection>
                 }
               />
             </Routes>

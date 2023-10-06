@@ -10,8 +10,8 @@ export default function HomePage() {
       </Helmet>
       <Flex justify="center" align="center" gap="sm" direction="column">
         <Welcome />
-        <About />
         <HomeCardPreview />
+        <About />
       </Flex>
     </>
   );

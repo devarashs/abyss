@@ -21,6 +21,7 @@ export const Panel = [
 ];
 
 export const FrameSelection = [
+  { label: 'All Frame Types', value: 'all' },
   { label: 'Basic', value: '0' },
   { label: 'Elemental', value: '1' },
 ];

@@ -8673,6 +8673,11 @@ react-number-format@^5.2.2:
   dependencies:
     prop-types "^15.7.2"
 
+react-parallax-tilt@^1.7.169:
+  version "1.7.169"
+  resolved "https://registry.yarnpkg.com/react-parallax-tilt/-/react-parallax-tilt-1.7.169.tgz#11cc02f3fa789f5f68f39a0e9c63e1f1ac318a0f"
+  integrity sha512-tGysOF43VSEomDXn7rC0gJW1Qg94MROWy3aceWMVUkrctVXL4h3jlvv5aUNsx0vySys6Q6Xim2hmNGD5q+AbPg==
+
 react-redux@^8.1.2:
   version "8.1.2"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.1.2.tgz#9076bbc6b60f746659ad6d51cb05de9c5e1e9188"

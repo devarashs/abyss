@@ -30,3 +30,7 @@ interface CardProps {
   description: string;
   level: number;
 }
+
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
